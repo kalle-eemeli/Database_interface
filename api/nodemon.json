@@ -1,0 +1,5 @@
+{
+    "env": {
+        "ACTIVE_DB": "project"
+    }
+}
