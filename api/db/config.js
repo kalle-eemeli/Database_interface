@@ -2,9 +2,9 @@ const mysql = require('mysql2');
 
 const config = {
     host: "localhost",
-    port: "3307",
+    port: "3306",
     user: "root",
-    password: "rootpass",
+    password: "kalledb",
     database: process.env.ACTIVE_DB
 };
 

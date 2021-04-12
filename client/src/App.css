@@ -41,6 +41,7 @@
 .MainView {
   text-align: center;
   font-family: 'Helvetica';
+  padding: 2%;
 }
 
 .horizontalContainer {

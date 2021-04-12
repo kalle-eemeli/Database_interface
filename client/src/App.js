@@ -50,7 +50,7 @@ class App extends React.Component{
     } else {
       return (
         <div className="MainView">
-          <h2>LIST OF CURRENT ENTITYS (limited to 5)</h2>
+          {/* <h2>LIST OF CURRENT ENTITYS (limited to 5)</h2> */}
             {/* <ul className="horizontalContainer">
               {tables.map(table => (
                 //<ClickableList table={table.TABLE_NAME} handler={this.handleClick.bind(this)}/>

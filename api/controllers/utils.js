@@ -40,7 +40,7 @@ exports.utils_get_all_fields = (req, res, next) => {
 
 exports.utils_get_all_entitys = (req, res, next) => {
     const table = req.params.table_name;
-    const sql = `SELECT * FROM ${table} LIMIT 5`;
+    const sql = `SELECT * FROM ${table} LIMIT 10`;
 
     connection.query(sql, (error, results, fields) => {
         if (error) {
