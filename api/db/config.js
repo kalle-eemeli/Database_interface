@@ -1,10 +1,10 @@
 const mysql = require('mysql2');
 
 const config = {
-    host: "localhost",
-    port: "3307",
-    user: "root",
-    password: "rootpass",
+    host: "142.93.140.110",
+    port: "3310",
+    user: "TTOW110",
+    password: "salasana",
     database: process.env.ACTIVE_DB
 };
 

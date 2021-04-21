@@ -118,7 +118,7 @@ export default class TrackingTab extends React.Component {
                         users != null &&
                         <FormControl className="horizontalContainer" style={
                             {
-                                minWidth: 200
+                                minWidth: 350
                             }
                         }>
                             <InputLabel>Users</InputLabel>
@@ -144,7 +144,7 @@ export default class TrackingTab extends React.Component {
                         projects != null &&
                         <FormControl className="horizontalContainer" style={
                             {
-                                minWidth: 200
+                                minWidth: 350
                             }
                         }>
                             <InputLabel>Projects</InputLabel>
@@ -169,7 +169,7 @@ export default class TrackingTab extends React.Component {
                             {
                                 display: "flex",
                                 flexDirection: "row",
-                                minWidth: 200,
+                                minWidth: 350,
                                 margin: 20,
                             }
                         }>

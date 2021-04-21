@@ -39,7 +39,7 @@ export default function MaterialTabsUser(props) {
             </TabPanel>
             <TabPanel key={3} value={value} index={2}>
             <h3>Project Overview</h3>
-                <MaterialTable table="Project" update_form={false}/>
+                <MaterialTable table="projectReview" update_form={false}/>
             </TabPanel>
         </div>
     )
