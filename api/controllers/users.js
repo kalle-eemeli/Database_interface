@@ -1,14 +1,74 @@
 //TODO: Update, Add, Delete
+const connection = require('../db/config');
 
 exports.users_add_user = (req, res, next) => {
 
-    const userName = req.body.userName;
-    const personID = req.body.personID;
-    const permission = req.body.permission;
-    const permissionExpire = req.body.permissionExpire;
+    const username = req.body.username;
+    const password = req.body.password;
+    
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+    const phonenumber = req.body.phonenumber;
+    const email = req.body.email;
 
+    const defaults = {
+        address: null,
+        permission: 1,
+    }
 
-    const sql = `INSERT INTO User (userName, personID, permission, permissionExpire) VALUES ("${userName}", "${personID}", "${permission}", "${permissionExpire}")`;
+    // res.status(200).json({
+    //     message: `${username}`
+    // })
+
+    const sql = `INSERT INTO User (userName, password, permission, firstName, lastName, phoneNumber, email)
+                 VALUES ("${username}", "${password}", ${defaults.permission}, "${firstname}", "${lastname}", "${phonenumber}", "${email}")`;
+
+    connection.query(sql, (error, results, fields) => {
+        if (error) {
+            //console.log(error.message);
+            res.status(500).json({
+                error: error.message,
+            });
+        } else {
+            res.status(201).json({
+                message: "SUCCESS",
+            });
+        }
+    })
+}
+
+exports.users_patch_user = (req, res, next) => {
+
+    const id = req.params._id;
+    
+    const username = req.body.username;
+    const password = req.body.password;
+    
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+    const phonenumber = req.body.phonenumber;
+    const email = req.body.email;
+
+    const sql = `UPDATE User SET firstName="${firstname}", lastName="${lastname}", userName="${username}", phoneNumber="${phonenumber}", password="${password}", email="${email}" WHERE userID=${id}`;
+
+    connection.query(sql, (error, results, fields) => {
+        if (error) {
+            console.log(error);
+            res.status(500).json({
+                error: error.message,
+            });
+        } else {
+            res.status(200).json({
+                message: `Updated!`
+            })
+        }
+    })
+
+}
+
+exports.users_get_fullname = (req, res, next) => {
+
+    const sql = `SELECT userID, concat(firstName, ' ', lastName) as fullName from User`;
 
     connection.query(sql, (error, results, fields) => {
         if (error) {
@@ -17,16 +77,9 @@ exports.users_add_user = (req, res, next) => {
                 error: error.message,
             });
         } else {
-            res.status(201).json({
-                message: `User ${userName} was added`,
-            });
+            res.status(200).send(results);
         }
     })
-}
-
-exports.users_patch_user = (req, res, next) => {
-
-    const userID = req.params._id;
 
 }
 
@@ -44,7 +97,7 @@ exports.users_delete_user = (req, res, next) => {
             });
         } else {
             res.status(200).json({
-                message: `Entry with id ${id} was deleted`,
+                message: `Entry with id ${userID} was deleted`,
             });
         }
     });

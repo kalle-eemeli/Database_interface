@@ -1,0 +1,10 @@
+{
+    "SERVER_URL": "http://localhost:9000",
+    "ROUTES": {
+        "USER": "/users/",
+        "PROJECT": "/project/",
+        "UTILS": "/utils/",
+        "TRACKING": "/tracking/",
+        "TEAM": "/team/"
+    }
+}

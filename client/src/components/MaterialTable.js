@@ -1,7 +1,9 @@
 import React from 'react';
-import { DataGrid } from '@material-ui/data-grid';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { Table, TableRow, TableCell, TableContainer, TableHead, TableBody, Button, Checkbox } from '@material-ui/core';
+import { Table, TableRow, TableCell, TableContainer, TableHead, TableBody, Button, Checkbox, IconButton } from '@material-ui/core';
+import UpdateForm from './forms/UpdateForm';
+
+import { SERVER_URL, ROUTES } from '../config.json';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -27,6 +29,8 @@ const StyledTableRow = withStyles((theme) => ({
 //     },
 // });
 
+const url = SERVER_URL.concat(ROUTES.UTILS);
+
 export default class MaterialTable extends React.Component {
 
     constructor(props){
@@ -35,7 +39,10 @@ export default class MaterialTable extends React.Component {
             table_name: this.props.table,
             items: [],
             fieldnames: [],
-            errmsg: ''
+            errmsg: '',
+            checked: null,
+            selected: null,
+            update_form: props.update_form,
         }
     }
     
@@ -67,6 +74,10 @@ export default class MaterialTable extends React.Component {
         })
     }
 
+    updateFields(){
+        this.fetchItems(this.state.table_name);
+    }
+
     componentDidMount(){
         try{
             this.fetchItems(this.state.table_name);
@@ -76,17 +87,42 @@ export default class MaterialTable extends React.Component {
         }
     }
 
-    itemChecked(item){
-        console.log(item);
+    itemChecked = (evt,item) => {
+
+        const checked = evt.target.checked;
+        console.log(checked);
+
+        if (!checked) {
+            this.setState({
+                selected: item,
+            });
+    
+            console.log(this.state.selected);
+        }
+
+    }
+
+    sorter(checkedItem, item){
+        
+        this.setState({
+            checked: checkedItem,
+            selected: {
+                username: item.userName,
+                password: item.password,
+                firstname: item.firstName,
+                lastname: item.lastName,
+                phonenumber: item.phoneNumber,
+                email: item.email,
+                userID: item.userID
+            },
+        })
+
     }
 
     render(){
 
         const {fieldnames} = this.state;
         const {items} = this.state;
-                
-        //console.log(this.state.fieldnames)
-        //console.log(this.state.columns)
 
         if (true) {
             return (
@@ -109,7 +145,12 @@ export default class MaterialTable extends React.Component {
                             {items.map((item, i) => (
                                 <StyledTableRow key={i}>
                                     <StyledTableCell>
-                                        <Checkbox></Checkbox>
+                                        <Checkbox 
+                                            checked={this.state.checked === i}
+                                            onClick={() => this.sorter(i, item)}
+                                            // onChange={(event) => this.itemChecked(event, item)}
+                                        >
+                                        </Checkbox>
                                     </StyledTableCell>
                                     {fieldnames.map(field => (
                                         <StyledTableCell>
@@ -118,11 +159,20 @@ export default class MaterialTable extends React.Component {
                                     ))}
                                 </StyledTableRow>
                             ))}
-
                         </TableBody>
                     </Table>
                     </TableContainer>
-                    
+                    {this.state.update_form === true &&
+                        <div>
+                        {this.state.selected != null &&
+                            <div>
+                                <IconButton onClick={() => this.setState({selected: null})}>Close</IconButton>
+                                <UpdateForm object={this.state.selected} onChange={() => this.updateFields()}></UpdateForm>
+                            </div>
+                        }
+                        </div>
+                    }
+                        
                 </div>
             )
         } else {

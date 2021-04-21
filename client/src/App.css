@@ -142,3 +142,10 @@ p {
   display: flex;
   justify-content: flex-end;
 }
+
+.TrackForm {
+  display: flex;
+  flex-direction: row;
+  min-width: 200000;
+  margin: 20;
+}

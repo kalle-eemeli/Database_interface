@@ -1,7 +1,7 @@
 const connection = require('../db/config');
 
 exports.projects_get_all = (req, res, next) => {
-    const sql = "SELECT * FROM projects";
+    const sql = "SELECT projectID, projectName FROM Project";
 
     connection.query(sql, (error, results, fields) => {
         if (error) {

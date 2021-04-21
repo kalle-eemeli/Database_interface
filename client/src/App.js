@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
 import MaterialTabs from './components/MaterialTabs';
-import TableView from './components/TableView';
+import MaterialTabsUser from './components/MaterialTabsUser';
+
+import { SERVER_URL, ROUTES } from './config.json';
 
 class App extends React.Component{
   constructor(props){
@@ -14,7 +16,10 @@ class App extends React.Component{
   }
 
   selectAllTables = async () => {
-    await fetch('http://localhost:9000/utils/', {method: 'GET', cache: 'no-cache'})
+
+    const url = SERVER_URL.concat(ROUTES.UTILS);
+
+    await fetch(url, {method: 'GET', cache: 'no-cache'})
     .then(res => res.json())
     .then(result => {
       this.setState({
@@ -46,7 +51,7 @@ class App extends React.Component{
     
 
     if (!isLoaded) {
-      return <div>Loading...</div>;
+      return <div>Loading...<MaterialTabsUser></MaterialTabsUser></div>;
     } else {
       return (
         <div className="MainView">
@@ -59,6 +64,7 @@ class App extends React.Component{
                 </li>
               ))}
             </ul> */}
+            <MaterialTabsUser></MaterialTabsUser>
             <MaterialTabs tables={tables}></MaterialTabs>
           {/* <div className="Forms">
             <h2>ADD NEW ENTRY TO DATABASE</h2>
@@ -69,80 +75,5 @@ class App extends React.Component{
     }
   }
 }
-
-class InsertForm extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      firstname: '',
-      lastname: '',
-      address: '',
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleSubmit(event) {
-    const fn = this.state.firstname;
-    const ad = this.state.address;
-    const ln = this.state.lastname;
-
-    this.postData('http://localhost:9000/Person/', {first_name: fn, last_name: ln, address: ad}).then(data => console.log(data));
-
-  }
-
-  handleChange(event) {
-
-    const target = event.target;
-    const name = target.name;
-
-    this.setState({
-      [name]: event.target.value
-    });
-  }
-
-  postData = async (url='', data={}) => {
-    const response = await fetch(url, {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-    return response.json();
-  }
-
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Firstname:<br />
-          <input type="text" name="firstname" value={this.state.firstname} onChange={this.handleChange}></input>
-        </label>
-        <br />
-        <label>
-          Lastname:<br />
-          <input type="text" name="lastname" value={this.state.lastname} onChange={this.handleChange}></input>
-        </label>
-        <br />
-        <label>
-          Address:<br />
-          <input type="text" name="address" value={this.state.address} onChange={this.handleChange}></input>
-        </label>
-        <br />
-        <input type="submit" value="Submit"></input>
-      </form>
-    )
-  }
-}
-
 
 export default App;
