@@ -29,10 +29,6 @@ class App extends React.Component{
     })
   }
 
-  handleClick(id) {
-    this.deleteData('http://localhost:9000/Person/', id);
-  }
-
   deleteData = async (url='', id) => {
     const response = await fetch(url + id, {
       method: 'DELETE',

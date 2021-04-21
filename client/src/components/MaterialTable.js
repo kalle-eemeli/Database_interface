@@ -47,7 +47,7 @@ export default class MaterialTable extends React.Component {
     }
     
     fetchItems = async (table) => {
-        await fetch(`http://localhost:9000/utils/selectall/${table}/`)
+        await fetch(`${SERVER_URL}/utils/selectall/${table}/`)
         .then(res => res.json())
         .then(result => {
             this.setState( prevState =>({
@@ -61,7 +61,7 @@ export default class MaterialTable extends React.Component {
     }
 
     fetchFieldnames = async (table_name) => {
-        await fetch(`http://localhost:9000/utils/${table_name}/`)
+        await fetch(`${SERVER_URL}/utils/${table_name}/`)
         .then(res => res.json())
         .then(result => {
             this.setState( prevState =>({

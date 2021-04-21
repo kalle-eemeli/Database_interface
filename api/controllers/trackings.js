@@ -2,7 +2,7 @@ const connection = require('../db/config');
 
 exports.tracking_get_all = (req, res, next) => {
     const table = req.params.table_name;
-    const sql = `SELECT * FROM Tracking LIMIT 10`;
+    const sql = `SELECT * FROM Tracking LIMIT 15`;
 
     connection.query(sql, (error, results, fields) => {
         if (error) {
@@ -34,7 +34,7 @@ exports.tracking_add_new = (req, res, next) => {
     // })
 
     const sql = `INSERT INTO Tracking (user, project, startTime, endTime, team)
-                 VALUES ("${user}", "${project}", "${startTime}", "${endTime}", "${defaults.team}")`;
+                 VALUES (${user}, ${project}, "${startTime}", "${endTime}", ${defaults.team})`;
 
     connection.query(sql, (error, results, fields) => {
         if (error) {

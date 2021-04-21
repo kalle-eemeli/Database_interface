@@ -2,9 +2,9 @@
     "SERVER_URL": "http://localhost:9000",
     "ROUTES": {
         "USER": "/users/",
-        "PROJECT": "/project/",
+        "PROJECT": "/projects/",
         "UTILS": "/utils/",
-        "TRACKING": "/tracking/",
+        "TRACKING": "/Tracking/",
         "TEAM": "/team/"
     }
 }

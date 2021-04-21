@@ -2,6 +2,8 @@ import { TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@m
 import React from 'react';
 import postData from './PostData';
 
+import { SERVER_URL, ROUTES } from '../../config.json';
+
 export default class TrackingTab extends React.Component {
     
     constructor(props){
@@ -33,7 +35,10 @@ export default class TrackingTab extends React.Component {
     }
 
     fetchUsers = async () => {
-        await fetch(`http://localhost:9000/users/`)
+
+        const url = SERVER_URL.concat(ROUTES.USER);
+
+        await fetch(url)
         .then(res => res.json())
         .then(result => {
             this.setState( prevState =>({
@@ -48,7 +53,10 @@ export default class TrackingTab extends React.Component {
     }
 
     fetchProjects = async () => {
-        await fetch(`http://localhost:9000/projects/`)
+
+        const url = SERVER_URL.concat(ROUTES.PROJECT);
+
+        await fetch(url)
         .then(res => res.json())
         .then(result => {
             this.setState( prevState =>({
