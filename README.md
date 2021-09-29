@@ -7,7 +7,7 @@ Originally the idea was to just use this client as a visualization tool for basi
 
 Eventually it needed to be expanded to include a lot more functionality like adding, removing and updating objetcs. However due to time constraints, all of these weren't finished and the final result is more like a demo than a fully developed product (might be finished later).
 
-Later [Material UI](https://mui.com/ "Material UI") elements were also implemented to make the visual side of the project more pleasing.
+Later on [Material UI](https://mui.com/ "Material UI") elements were also implemented to make the visual side of the project more pleasing.
 
 
 MORE INFO + PICTURES COMING
